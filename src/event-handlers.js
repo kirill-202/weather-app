@@ -11,13 +11,14 @@ export function initializeEventListeners() {
 
     clearButton.addEventListener("click", clearInputFields);
 
-    submitButton.addEventListener("click", async () => {
+    submitButton.addEventListener("click", async (event) => {
+        event.stopImmediatePropagation();
         const formData = getFormData();
-        const weatherData = await getWeatherData(formData, weatherAPI);
-        if (weatherData) {
+        try { 
+            const weatherData = await getWeatherData(formData, weatherAPI);
             handleWeatherData(weatherData);
-        } else {
-            alert("Failed to fetch weather data. Please try again.");
+        } catch (error){
+            alert(error.message);
         }
     });
 }

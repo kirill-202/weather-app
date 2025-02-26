@@ -7,13 +7,13 @@ export async function getWeatherData(formData, weatherAPI) {
         } else if (formData.latitude && formData.longitude) {
             weatherData = await weatherAPI.getByLongLat(formData.latitude, formData.longitude, formData.unit);
         } else {
-            alert("Please enter either a city OR latitude and longitude.");
-            return null;
+            throw new Error("Please enter either a city OR latitude and longitude.");
+
         }
         return weatherData;
     } catch (error) {
         console.error("Error fetching weather data:", error);
-        return null;
+        throw error;
     }
 }
 
@@ -38,6 +38,8 @@ export function clearInputFields() {
 export function handleWeatherData(weatherData) {
     const generalInfoElem = document.querySelector(".general-data");
     const weatherElem = document.querySelector(".weather-data");
+    generalInfoElem.replaceChildren();
+    weatherElem.replaceChildren();
 
     for (const dataProperty in weatherData) {
         if (["days", "alerts", "stations"].includes(dataProperty)) {
@@ -46,9 +48,6 @@ export function handleWeatherData(weatherData) {
         if (dataProperty === "currentConditions") {
             const weatherDetails = weatherData[dataProperty];
             for (const weatherField in weatherDetails) {
-                if (weatherDetails[weatherField] == null) {
-                    continue;
-                }
                 const dataField = document.createElement("div");
                 dataField.id = weatherField;
                 dataField.textContent = `${weatherField}: ${weatherDetails[weatherField]}`;
