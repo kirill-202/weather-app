@@ -28,7 +28,9 @@ module.exports = {
       template: './src/index.html', 
     }),
     new MiniCssExtractPlugin(),
-    new Dotenv(),
+    new Dotenv({
+        path: path.resolve(__dirname, '.env'), 
+      }),
   ],
   devServer: {
     static: './dist',

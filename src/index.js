@@ -1,8 +1,9 @@
 import './styles.css';
-import WeatherAPI from './weather-api.js'; 
+import { initializeEventListeners } from './event-handlers.js';
 
-const API_KEY = process.env.WEATHER_API_KEY;
+document.addEventListener("DOMContentLoaded", () => {
+    initializeEventListeners();
+});
 
 
-
-
+console.log('Weather API Key:', process.env.WEATHER_API_KEY);
