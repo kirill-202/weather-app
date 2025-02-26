@@ -36,13 +36,10 @@ export function clearInputFields() {
 }
 
 export function handleWeatherData(weatherData) {
-    const generalInfoElem = document.querySelector(".general-data");
-    const weatherElem = document.querySelector(".weather-data");
-    generalInfoElem.replaceChildren();
-    weatherElem.replaceChildren();
+    const [generalInfoElem, weatherElem] = UpdateSectionElements();
 
     for (const dataProperty in weatherData) {
-        if (["days", "alerts", "stations"].includes(dataProperty)) {
+        if (["days", "alerts", "stations", "queryCost"].includes(dataProperty)) {
             continue;
         }
         if (dataProperty === "currentConditions") {
@@ -63,4 +60,19 @@ export function handleWeatherData(weatherData) {
         dataField.textContent = `${dataProperty}: ${weatherData[dataProperty]}`;
         generalInfoElem.appendChild(dataField);
     }
+    const headerDetails = document.createElement("h2");
+    headerDetails.textContent = "Today's weather details";
+    generalInfoElem.appendChild(headerDetails);
+}
+
+function UpdateSectionElements() {
+    const generalInfoElem = document.querySelector(".general-data");
+    const weatherElem = document.querySelector(".weather-data");
+    generalInfoElem.replaceChildren();
+    weatherElem.replaceChildren();
+    const headerDetails = document.createElement("h2");
+    headerDetails.textContent = "General location information";
+    generalInfoElem.appendChild(headerDetails);
+    return [generalInfoElem, weatherElem];
+    
 }

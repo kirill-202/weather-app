@@ -1,6 +1,7 @@
 * {
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
     
 }
 
@@ -42,6 +43,7 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+ 
     font-size: 2rem;
     border-radius: 20px;
     margin: 10px;
@@ -50,21 +52,30 @@ header h1 {
 
 .output {
     display: flex;
+    flex-direction: column;
     font-size: 14px;
     align-items: center;
     justify-content: start;
-    margin: 10px;
+    box-sizing: border-box;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.general-data, .weather-data {
+.general-data{
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.weather-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    padding: 20px;
+
 }
 
 form {
     background-color: var(--secondary-color);
-    padding: 20px;
     width: 80%;
     max-width: 400px;
     display: flex;
@@ -79,7 +90,7 @@ label {
     font-weight: bold;
     font-size: 14px;
     align-self: start;
-    margin-left: 30px;
+    margin-left: 36px;
 
 }
 
